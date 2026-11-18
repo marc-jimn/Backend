@@ -11,7 +11,7 @@ export class VisitaController {
     obtenerCatalogos,
     crearPuntoVacunacion,
   }) {
-    // CASOS DE USO
+    // Casos de uso
     this.casoObtenerVisitas = obtenerVisitas;
     this.casoObtenerVisitaPorId = obtenerVisitaPorId;
     this.casoCrearVisita = crearVisita;
@@ -23,10 +23,6 @@ export class VisitaController {
     this.casoObtenerCatalogos = obtenerCatalogos;
     this.casoCrearPuntoVacunacion = crearPuntoVacunacion;
   }
-
-  // =====================================================
-  // VALIDAR ID
-  // =====================================================
 
   validarId(id) {
     const identificador = Number(id);
@@ -45,10 +41,6 @@ export class VisitaController {
 
     return identificador;
   }
-
-  // =====================================================
-  // OBTENER TODAS LAS VISITAS
-  // =====================================================
 
   obtenerTodos = async (req, res, next) => {
     try {
@@ -111,10 +103,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // OBTENER VISITA POR ID
-  // =====================================================
-
   obtenerPorId = async (req, res, next) => {
     try {
       const id = this.validarId(req.params.id);
@@ -137,10 +125,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // CREAR VISITA
-  // =====================================================
-
   crear = async (req, res, next) => {
     try {
       const resultado =
@@ -155,10 +139,6 @@ export class VisitaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // ACTUALIZAR VISITA
-  // =====================================================
 
   actualizar = async (req, res, next) => {
     try {
@@ -186,10 +166,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // AGREGAR JORNADAS
-  // =====================================================
-
   agregarJornadas = async (req, res, next) => {
     try {
       const visitaId = this.validarId(req.params.id);
@@ -209,10 +185,6 @@ export class VisitaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // ACTUALIZAR JORNADA
-  // =====================================================
 
   actualizarJornada = async (req, res, next) => {
     try {
@@ -236,10 +208,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // ELIMINAR JORNADA
-  // =====================================================
-
   eliminarJornada = async (req, res, next) => {
     try {
       const visitaId = this.validarId(req.params.id);
@@ -261,10 +229,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // CANCELAR VISITA
-  // =====================================================
-
   cancelar = async (req, res, next) => {
     try {
       const id = this.validarId(req.params.id);
@@ -282,10 +246,6 @@ export class VisitaController {
     }
   };
 
-  // =====================================================
-  // OBTENER CATÁLOGOS
-  // =====================================================
-
   obtenerCatalogos = async (req, res, next) => {
     try {
       const resultado =
@@ -299,10 +259,6 @@ export class VisitaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // CREAR PUNTO DE VACUNACIÓN
-  // =====================================================
 
   crearPuntoVacunacion = async (req, res, next) => {
     try {

@@ -6,9 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { pool, verificarConexion } from "./infrastructure/database/database.js";
 
-// =====================================================
-// PERSONAL
-// =====================================================
+// Personal
 
 import { PersonalRepositoryPostgres } from "./infrastructure/repositories/PersonalRepositoryPostgres.js";
 
@@ -21,24 +19,18 @@ import { GuardarFotoPersonal } from "./application/use-cases/GuardarFotoPersonal
 import { PersonalController } from "./interfaces/http/controllers/PersonalController.js";
 import { crearPersonalRoutes } from "./interfaces/http/routes/PersonalRoutes.js";
 
-// =====================================================
-// ROLES
-// =====================================================
+// Roles
 
 import { RolRepositoryPostgres } from "./infrastructure/repositories/RolRepositoryPostgres.js";
 import { ObtenerRoles } from "./application/use-cases/ObtenerRoles.js";
 import { RolController } from "./interfaces/http/controllers/RolController.js";
 import { crearRolRoutes } from "./interfaces/http/routes/RolRoutes.js";
 
-// =====================================================
-// LOCALIDADES
-// =====================================================
+// Localidades
 
 import localidadRoutes from "./interfaces/http/routes/LocalidadRoutes.js";
 
-// =====================================================
-// CAMPAÑAS
-// =====================================================
+// Campañas
 
 import { CampaniaRepositoryPostgres } from "./infrastructure/repositories/CampaniaRepositoryPostgres.js";
 
@@ -51,9 +43,7 @@ import { ObtenerResponsablesCampania } from "./application/use-cases/ObtenerResp
 import { CampaniaController } from "./interfaces/http/controllers/CampaniaController.js";
 import { crearCampaniaRoutes } from "./interfaces/http/routes/CampaniaRoutes.js";
 
-// =====================================================
-// VEHÍCULOS
-// =====================================================
+// Vehículos
 
 import { VehiculoRepositoryPostgres } from "./infrastructure/repositories/VehiculoRepositoryPostgres.js";
 
@@ -66,9 +56,7 @@ import { GuardarFotoVehiculo } from "./application/use-cases/GuardarFotoVehiculo
 import { VehiculoController } from "./interfaces/http/controllers/VehiculoController.js";
 import { crearVehiculoRoutes } from "./interfaces/http/routes/VehiculoRoutes.js";
 
-// =====================================================
-// BRIGADAS
-// =====================================================
+// Brigadas
 
 import { BrigadaRepositoryPostgres } from "./infrastructure/repositories/BrigadaRepositoryPostgres.js";
 
@@ -82,9 +70,7 @@ import { AsignarLocalidades } from "./application/use-cases/AsignarLocalidades.j
 import { BrigadaController } from "./interfaces/http/controllers/BrigadaController.js";
 import { crearBrigadaRoutes } from "./interfaces/http/routes/BrigadaRoutes.js";
 
-// =====================================================
-// VISITAS
-// =====================================================
+// Visitas
 
 import { VisitaRepositoryPostgres } from "./infrastructure/repositories/VisitaRepositoryPostgres.js";
 
@@ -103,9 +89,7 @@ import { ActualizarEstadosVisitas } from "./application/use-cases/ActualizarEsta
 import { VisitaController } from "./interfaces/http/controllers/VisitaController.js";
 import { crearVisitaRoutes } from "./interfaces/http/routes/VisitaRoutes.js";
 
-// =====================================================
-// RECORRIDOS
-// =====================================================
+// Recorridos
 
 import { OSRMService } from "./infrastructure/services/OSRMService.js";
 
@@ -117,21 +101,15 @@ import { CalcularRecorridosVisita } from "./application/use-cases/CalcularRecorr
 import { RecorridoController } from "./interfaces/http/controllers/RecorridoController.js";
 import { crearRecorridoRoutes } from "./interfaces/http/routes/RecorridoRoutes.js";
 
-// =====================================================
-// INVENTARIO
-// =====================================================
+// Inventario
 
 import { crearRutasInventario } from "./interfaces/http/routes/InventarioRoutes.js";
 
-// =====================================================
-// REPORTES
-// =====================================================
+// Reportes
 
 import { crearRutasTablero } from "./interfaces/http/routes/TableroRoutes.js";
 
-// =====================================================
-// AUTENTICACIÓN Y USUARIOS
-// =====================================================
+// Autenticación y usuarios
 
 import { UsuarioRepositoryPostgres } from "./infrastructure/repositories/UsuarioRepositoryPostgres.js";
 
@@ -145,9 +123,7 @@ import { crearAuthRoutes } from "./interfaces/http/routes/AuthRoutes.js";
 import { autenticarUsuario } from "./interfaces/http/middlewares/autenticarUsuario.js";
 import { verificarPermiso } from "./interfaces/http/middlewares/verificarPermiso.js";
 
-// =====================================================
-// TELEGRAM Y OLLAMA
-// =====================================================
+// Telegram y Ollama
 
 import { TelegramService } from "./infrastructure/telegram/TelegramService.js";
 import { OllamaService } from "./infrastructure/telegram/OllamaService.js";
@@ -157,9 +133,7 @@ import { crearTelegramRoutes } from "./interfaces/http/routes/TelegramRoutes.js"
 import TableroRepositoryPostgres from "./infrastructure/repositories/TableroRepositoryPostgres.js";
 import ObtenerReportes from "./application/use-cases/ObtenerReportes.js";
 
-// =====================================================
-// MIDDLEWARES
-// =====================================================
+// Middlewares
 
 import { errorHandler } from "./interfaces/http/middlewares/errorHandler.js";
 
@@ -172,9 +146,7 @@ const __dirname = path.dirname(__filename);
 
 const carpetaUploads = path.resolve(__dirname, "..", "uploads");
 
-// =====================================================
-// CONFIGURACIÓN DEL SERVIDOR
-// =====================================================
+// Configuración del servidor
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -182,16 +154,14 @@ app.use(cors({
 
 app.use(express.json());
 
-// ACCESO PÚBLICO A LAS FOTOGRAFÍAS
+// Acceso público a las fotografías
 
 app.use(
   "/uploads",
   express.static(carpetaUploads)
 );
 
-// =====================================================
-// PERSONAL
-// =====================================================
+// Personal
 
 const personalRepository = new PersonalRepositoryPostgres();
 
@@ -203,9 +173,7 @@ const controller = new PersonalController({
   guardarFotoPersonal: new GuardarFotoPersonal(personalRepository),
 });
 
-// =====================================================
-// ROLES
-// =====================================================
+// Roles
 
 const rolRepository = new RolRepositoryPostgres();
 
@@ -213,9 +181,7 @@ const obtenerRoles = new ObtenerRoles(rolRepository);
 
 const rolController = new RolController(obtenerRoles);
 
-// =====================================================
-// CAMPAÑAS
-// =====================================================
+// Campañas
 
 const campaniaRepository = new CampaniaRepositoryPostgres();
 
@@ -227,9 +193,7 @@ const campaniaController = new CampaniaController({
   obtenerResponsables: new ObtenerResponsablesCampania(campaniaRepository),
 });
 
-// =====================================================
-// VEHÍCULOS
-// =====================================================
+// Vehículos
 
 const vehiculoRepository = new VehiculoRepositoryPostgres();
 
@@ -247,9 +211,7 @@ const vehiculoController = new VehiculoController({
   guardarFotoVehiculo,
 });
 
-// =====================================================
-// BRIGADAS
-// =====================================================
+// Brigadas
 
 const brigadaRepository = new BrigadaRepositoryPostgres();
 
@@ -262,9 +224,7 @@ const brigadaController = new BrigadaController({
   asignarLocalidades: new AsignarLocalidades(brigadaRepository),
 });
 
-// =====================================================
-// VISITAS
-// =====================================================
+// Visitas
 
 const visitaRepository = new VisitaRepositoryPostgres();
 
@@ -285,9 +245,7 @@ const actualizarEstadosVisitas = new ActualizarEstadosVisitas(
   visitaRepository
 );
 
-// =====================================================
-// RUTAS Y RECORRIDOS
-// =====================================================
+// Rutas y recorridos
 
 const osrmService = new OSRMService();
 
@@ -309,9 +267,7 @@ const recorridoController = new RecorridoController({
   ),
 });
 
-// =====================================================
-// AUTENTICACIÓN Y USUARIOS
-// =====================================================
+// Autenticación y Usuarios
 
 const usuarioRepository = new UsuarioRepositoryPostgres();
 
@@ -321,9 +277,7 @@ const authController = new AuthController({
   cambiarPassword: new CambiarPassword(usuarioRepository),
 });
 
-// =====================================================
-// COMPROBAR CONEXIÓN
-// =====================================================
+// Comprobar conexión
 
 app.get("/api/health", async (req, res, next) => {
   try {
@@ -339,17 +293,13 @@ app.get("/api/health", async (req, res, next) => {
   }
 });
 
-// =====================================================
-// RUTAS DE LA API
-// =====================================================
+// Rutas de la API
 
 app.use("/api/auth", crearAuthRoutes(authController, autenticarUsuario));
 
 app.use("/api", autenticarUsuario);
 
-// =====================================================
-// TELEGRAM
-// =====================================================
+// Telegram
 
 const telegramService = new TelegramService(pool);
 
@@ -358,9 +308,7 @@ app.use(
   crearTelegramRoutes(telegramService)
 );
 
-// =====================================================
-// RUTAS DE LOS MÓDULOS
-// =====================================================
+// Rutas por módulo 
 
 app.use("/api/personal", crearPersonalRoutes(controller, verificarPermiso));
 app.use("/api/localidades", localidadRoutes);
@@ -373,9 +321,7 @@ app.use("/api/rutas", crearRecorridoRoutes(recorridoController));
 app.use("/api/inventario", crearRutasInventario(pool));
 app.use("/api", crearRutasTablero(pool));
 
-// =====================================================
-// RUTA NO ENCONTRADA
-// =====================================================
+// Ruta no encontrada
 
 app.use((req, res) => {
   res.status(404).json({
@@ -383,15 +329,11 @@ app.use((req, res) => {
   });
 });
 
-// =====================================================
-// MANEJO DE ERRORES
-// =====================================================
+// Manejo de errores
 
 app.use(errorHandler);
 
-// =====================================================
-// ACTUALIZACIÓN AUTOMÁTICA DE VISITAS
-// =====================================================
+// Actualización automática de visitas
 
 let sincronizacionEnCurso = false;
 
@@ -416,15 +358,11 @@ const ejecutarSincronizacionVisitas = async () => {
   }
 };
 
-// =====================================================
-// PUERTO
-// =====================================================
+// Puerto
 
 const PORT = process.env.PORT || 3000;
 
-// =====================================================
-// INICIALIZAR BOT DE TELEGRAM
-// =====================================================
+// Inicializar TelegramBot
 
 const telegramBot = process.env.TELEGRAM_BOT_TOKEN
   ? new TelegramBot({
@@ -444,9 +382,7 @@ const telegramBot = process.env.TELEGRAM_BOT_TOKEN
     })
   : null;
 
-// =====================================================
-// INICIAR SERVIDOR
-// =====================================================
+// Iniciar servidor
 
 const iniciarServidor = async () => {
   try {
@@ -494,9 +430,7 @@ const iniciarServidor = async () => {
 
 iniciarServidor();
 
-// =====================================================
-// CIERRE ORDENADO
-// =====================================================
+// Cierre
 
 const cerrarServidor = async () => {
   telegramBot?.detener();

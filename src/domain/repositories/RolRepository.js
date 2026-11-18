@@ -1,4 +1,3 @@
-
 export class RolRepository {
   async obtenerTodos() {
     throw new Error(

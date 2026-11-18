@@ -31,10 +31,6 @@ export class RecorridoRepositoryPostgres extends RecorridoRepository {
     return error;
   }
 
-  // =====================================================
-  // CONSULTA GENERAL DE RECORRIDOS
-  // =====================================================
-
   async consultar(visitaId = null) {
     try {
       const consulta = `
@@ -193,25 +189,13 @@ export class RecorridoRepositoryPostgres extends RecorridoRepository {
     }
   }
 
-  // =====================================================
-  // OBTENER TODOS
-  // =====================================================
-
   async obtenerTodos() {
     return await this.consultar();
   }
 
-  // =====================================================
-  // OBTENER POR VISITA
-  // =====================================================
-
   async obtenerPorVisita(visitaId) {
     return await this.consultar(visitaId);
   }
-
-  // =====================================================
-  // ASEGURAR QUE EXISTAN LOS RECORRIDOS
-  // =====================================================
 
   async prepararRecorridos(visitaId) {
     await pool.query(
@@ -248,10 +232,6 @@ export class RecorridoRepositoryPostgres extends RecorridoRepository {
       [visitaId]
     );
   }
-
-  // =====================================================
-  // CALCULAR RECORRIDOS DE UNA VISITA
-  // =====================================================
 
   async calcularPorVisita(visitaId) {
     try {

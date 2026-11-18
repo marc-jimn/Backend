@@ -16,10 +16,6 @@ export class BrigadaController {
     this.casoUsoAsignarLocalidades = casoUsoAsignarLocalidades;
   }
 
-  // =====================================================
-  // VALIDAR ID
-  // =====================================================
-
   validarId(id) {
     const identificador = Number(id);
 
@@ -38,10 +34,6 @@ export class BrigadaController {
     return identificador;
   }
 
-  // =====================================================
-  // CREAR BRIGADA
-  // =====================================================
-
   crear = async (req, res, next) => {
     try {
       const resultado = await this.crearBrigada.ejecutar(
@@ -57,10 +49,6 @@ export class BrigadaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // OBTENER TODAS LAS BRIGADAS
-  // =====================================================
 
   obtenerTodos = async (req, res, next) => {
     try {
@@ -116,10 +104,6 @@ export class BrigadaController {
     }
   };
 
-  // =====================================================
-  // OBTENER BRIGADA POR ID
-  // =====================================================
-
   obtenerPorId = async (req, res, next) => {
     try {
       const id = this.validarId(req.params.id);
@@ -142,10 +126,6 @@ export class BrigadaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // ACTUALIZAR BRIGADA
-  // =====================================================
 
   actualizar = async (req, res, next) => {
     try {
@@ -182,10 +162,6 @@ export class BrigadaController {
     }
   };
 
-  // =====================================================
-  // ASIGNAR INTEGRANTES
-  // =====================================================
-
   asignarIntegrantes = async (req, res, next) => {
     try {
       const brigadaId = this.validarId(req.params.id);
@@ -205,10 +181,6 @@ export class BrigadaController {
       next(error);
     }
   };
-
-  // =====================================================
-  // ASIGNAR LOCALIDADES
-  // =====================================================
 
   asignarLocalidades = async (req, res, next) => {
     try {

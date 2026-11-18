@@ -4,7 +4,7 @@ import { CampaniaRepository } from "../../domain/repositories/CampaniaRepository
 
 export class CampaniaRepositoryPostgres extends CampaniaRepository {
 
-  // VERIFICAR QUE EL RESPONSABLE SEA COORDINADOR ACTIVO
+  // Verificar que el responsable sea coordinador activo
   async validarResponsable(responsableId) {
     if (responsableId === null || responsableId === undefined) {
       return;
@@ -30,7 +30,7 @@ export class CampaniaRepositoryPostgres extends CampaniaRepository {
     }
   }
 
-  // REGISTRAR CAMPAÑA
+  // Registrar campaña
   async crear(datos) {
     const campania = new Campania(datos);
 
@@ -75,7 +75,7 @@ export class CampaniaRepositoryPostgres extends CampaniaRepository {
     return await this.obtenerPorId(resultado.rows[0].id);
   }
 
-  // OBTENER TODAS LAS CAMPAÑAS
+  // Obtener todas las campañas
   async obtenerTodos() {
     const consulta = `
       SELECT
@@ -104,7 +104,7 @@ export class CampaniaRepositoryPostgres extends CampaniaRepository {
     return resultado.rows;
   }
 
-  // OBTENER CAMPAÑA POR ID
+  // Obtener campaña por Id
   async obtenerPorId(id) {
     const consulta = `
       SELECT
@@ -136,7 +136,7 @@ export class CampaniaRepositoryPostgres extends CampaniaRepository {
     return resultado.rows[0] || null;
   }
 
-  // ACTUALIZAR CAMPAÑA
+  // Actualizar campaña
   async actualizar(id, datos) {
     const actual = await this.obtenerPorId(id);
 
@@ -201,7 +201,7 @@ export class CampaniaRepositoryPostgres extends CampaniaRepository {
     return await this.obtenerPorId(id);
   }
 
-  // OBTENER COORDINADORES ACTIVOS
+  // Obtener coordinadores activos
   async obtenerResponsables() {
     const consulta = `
       SELECT

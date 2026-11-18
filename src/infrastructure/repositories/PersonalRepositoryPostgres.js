@@ -4,7 +4,7 @@ import { PersonalRepository } from "../../domain/repositories/PersonalRepository
 
 export class PersonalRepositoryPostgres extends PersonalRepository {
 
-  // REGISTRAR PERSONAL
+  // Registrar personal
   async crear(datos) {
     const personal = new Personal({
       ...datos,
@@ -47,7 +47,7 @@ export class PersonalRepositoryPostgres extends PersonalRepository {
     return await this.obtenerPorId(resultado.rows[0].id);
   }
 
-  // OBTENER TODO EL PERSONAL CON SU ROL
+  // Obtener todo el personal con su rol
   async obtenerTodos() {
     const consulta = `
       SELECT
@@ -63,7 +63,7 @@ export class PersonalRepositoryPostgres extends PersonalRepository {
     return resultado.rows;
   }
 
-  // OBTENER PERSONAL POR ID CON SU ROL
+  // Obtener personal por su Id con su rol
   async obtenerPorId(id) {
     const consulta = `
       SELECT
@@ -79,7 +79,7 @@ export class PersonalRepositoryPostgres extends PersonalRepository {
     return resultado.rows[0] || null;
   }
 
-  // ACTUALIZAR DATOS DEL PERSONAL
+  // Actualizar datos del personal
   async actualizar(id, datos) {
     const actual = await this.obtenerPorId(id);
 
@@ -135,7 +135,7 @@ export class PersonalRepositoryPostgres extends PersonalRepository {
     return await this.obtenerPorId(id);
   }
 
-  // GUARDAR O CAMBIAR FOTOGRAFÍA
+  // Guardar o cambiar campaña
   async guardarFoto(id, rutaFoto) {
     const consulta = `
       UPDATE personal

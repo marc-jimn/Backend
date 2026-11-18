@@ -29,7 +29,6 @@ export class OSRMService {
       }
     }
 
-    // OSRM espera longitud,latitud.
     const coordenadasURL = coordenadas
       .map(
         (punto) =>
@@ -81,7 +80,6 @@ export class OSRMService {
       );
     }
 
-    // Guardamos las indicaciones de ida y regreso por separado.
     const instrucciones = {
       proveedor: "OSRM",
 

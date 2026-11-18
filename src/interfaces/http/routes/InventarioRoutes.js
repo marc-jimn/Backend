@@ -2,10 +2,6 @@ import { Router } from "express";
 import InventarioRepositoryPostgres from "../../../infrastructure/repositories/InventarioRepositoryPostgres.js";
 import InventarioController from "../controllers/InventarioController.js";
 
-/**
- * Crea el router del módulo Inventario.
- * Recibe el Pool de pg que ya usa el servidor; no crea otra conexión.
- */
 export const crearRutasInventario = (pool) => {
   const router = Router();
   const repository = new InventarioRepositoryPostgres(pool);

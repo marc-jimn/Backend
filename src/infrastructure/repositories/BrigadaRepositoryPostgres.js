@@ -54,10 +54,6 @@ export class BrigadaRepositoryPostgres extends BrigadaRepository {
     throw error;
   }
 
-  // =====================================================
-  // OBTENER BRIGADA CON SU EQUIPO Y LOCALIDADES
-  // =====================================================
-
   async obtenerPorId(id) {
     const consulta = `
       SELECT
@@ -142,11 +138,6 @@ export class BrigadaRepositoryPostgres extends BrigadaRepository {
     return resultado.rows[0] || null;
   }
 
-
-  // =====================================================
-  // REGISTRAR BRIGADA
-  // =====================================================
-
   async crear(datos) {
   try {
     const brigada = new Brigada(datos);
@@ -188,10 +179,6 @@ export class BrigadaRepositoryPostgres extends BrigadaRepository {
     this.manejarError(error);
   }
 }
-
-  // =====================================================
-// OBTENER TODAS LAS BRIGADAS
-// =====================================================
 
 async obtenerTodos(filtros = {}) {
 
@@ -275,10 +262,6 @@ async obtenerTodos(filtros = {}) {
   return resultado.rows;
 }
 
-  // =====================================================
-  // ACTUALIZAR BRIGADA
-  // =====================================================
-
   async actualizar(id, datos) {
     try {
       const actual = await this.obtenerPorId(id);
@@ -287,7 +270,7 @@ async obtenerTodos(filtros = {}) {
         return null;
       }
 
-      // No permitimos cambiar la campaña de una brigada.
+
       const brigada = new Brigada({
         ...actual,
         ...datos,
@@ -337,11 +320,6 @@ async obtenerTodos(filtros = {}) {
       this.manejarError(error);
     }
   }
-
-
-  // =====================================================
-  // ASIGNAR LOS CINCO INTEGRANTES
-  // =====================================================
 
   async asignarIntegrantes(brigadaId, integrantes) {
 
@@ -592,11 +570,6 @@ async obtenerTodos(filtros = {}) {
     return await this.obtenerPorId(brigadaId);
   }
 
-
-  // =====================================================
-  // ASIGNAR LOCALIDADES A UNA BRIGADA
-  // =====================================================
-
   async asignarLocalidades(brigadaId, localidadIds) {
 
     if (!Array.isArray(localidadIds)) {
@@ -701,8 +674,7 @@ async obtenerTodos(filtros = {}) {
         throw error;
       }
 
-      // Comprobar que ninguna localidad esté asignada
-      // a otra brigada de la misma campaña.
+      // Comprobar que ninguna localidad esté asignada a otra brigada de la misma campaña.
 
       if (idsUnicos.length > 0) {
 

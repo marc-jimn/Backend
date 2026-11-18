@@ -64,10 +64,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
     return `${valores.year}-${valores.month}-${valores.day}`;
   }
 
-  // =====================================================
-  // CONSULTA GENERAL DE VISITAS
-  // =====================================================
-
   async obtenerTodos(filtros = {}) {
     try {
       const consulta = `
@@ -234,10 +230,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
     }
   }
 
-  // =====================================================
-  // OBTENER VISITA POR ID
-  // =====================================================
-
   async obtenerPorId(id) {
     const visitas = await this.obtenerTodos();
 
@@ -245,10 +237,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       (visita) => Number(visita.id) === Number(id)
     ) || null;
   }
-
-  // =====================================================
-  // INSERTAR JORNADAS Y CREAR RECORRIDOS
-  // =====================================================
 
   async insertarJornadas(
     client,
@@ -346,11 +334,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
     }
   }
 
-  
-  // =====================================================
-  // CREAR VISITA CON SUS JORNADAS
-  // =====================================================
-
   async crear(datos) {
     const client = await pool.connect();
 
@@ -437,10 +420,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
     }
   }
 
-  // =====================================================
-  // ACTUALIZAR DATOS GENERALES DE LA VISITA
-  // =====================================================
-
   async actualizar(id, datos) {
     try {
       const actual = await this.obtenerPorId(id);
@@ -496,10 +475,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       this.manejarError(error);
     }
   }
-
-  // =====================================================
-  // AGREGAR JORNADAS A UNA VISITA
-  // =====================================================
 
   async agregarJornadas(visitaId, jornadas) {
     const client = await pool.connect();
@@ -559,10 +534,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       client.release();
     }
   }
-
-  // =====================================================
-  // ACTUALIZAR UNA JORNADA Y SU RECORRIDO
-  // =====================================================
 
   async actualizarJornada(visitaId, jornadaId, datos) {
     const client = await pool.connect();
@@ -685,8 +656,7 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
         ]
       );
 
-      // Si cambió el punto de vacunación,
-      // reiniciar el recorrido anterior.
+      // Si cambió el punto de vacunación, reiniciar el recorrido anterior.
       if (
         Number(jornadaActual.punto_vacunacion_id) !== puntoId
       ) {
@@ -723,11 +693,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       client.release();
     }
   }
-
-  
-  // =====================================================
-  // ELIMINAR UNA JORNADA
-  // =====================================================
 
   async eliminarJornada(visitaId, jornadaId) {
     const client = await pool.connect();
@@ -791,10 +756,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       client.release();
     }
   }
-
-  // =====================================================
-  // CANCELAR VISITA
-  // =====================================================
 
   async cancelar(id) {
     const client = await pool.connect();
@@ -863,10 +824,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       client.release();
     }
   }
-
-  // =====================================================
-  // CATÁLOGOS PARA EL FORMULARIO
-  // =====================================================
 
   async obtenerCatalogos() {
     try {
@@ -947,10 +904,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
     }
   }
 
-  // =====================================================
-  // CREAR PUNTO DE VACUNACIÓN
-  // =====================================================
-
   async crearPuntoVacunacion(datos) {
     try {
       const localidadId = Number(datos.localidad_id);
@@ -994,10 +947,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       this.manejarError(error);
     }
   }
-
-  // =====================================================
-  // ACTUALIZAR ESTADOS DE FORMA AUTOMÁTICA
-  // =====================================================
 
   async sincronizarEstados(client) {
     const fechaHoy = this.obtenerFechaMexico();
@@ -1160,10 +1109,6 @@ export class VisitaRepositoryPostgres extends VisitaRepository {
       `
     );
   }
-
-  // =====================================================
-  // PROCESO AUTOMÁTICO DE ACTUALIZACIÓN
-  // =====================================================
 
   async actualizarEstadosAutomaticos() {
     const client = await pool.connect();

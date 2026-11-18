@@ -14,7 +14,6 @@ export class CampaniaController {
     this.obtenerResponsablesUseCase = obtenerResponsablesUseCase;
   }
 
-  // REGISTRAR CAMPAÑA
   crear = async (req, res, next) => {
     try {
       const resultado = await this.crearCampania.ejecutar(
@@ -30,7 +29,6 @@ export class CampaniaController {
     }
   };
 
-  // OBTENER TODAS LAS CAMPAÑAS
   obtenerTodos = async (req, res, next) => {
     try {
       const resultado = await this.obtenerCampanias.ejecutar();
@@ -43,7 +41,6 @@ export class CampaniaController {
     }
   };
 
-  // OBTENER CAMPAÑA POR ID
   obtenerPorId = async (req, res, next) => {
     try {
       const id = Number(req.params.id);
@@ -72,7 +69,6 @@ export class CampaniaController {
     }
   };
 
-  // ACTUALIZAR CAMPAÑA
   actualizar = async (req, res, next) => {
     try {
       const id = Number(req.params.id);
@@ -103,7 +99,6 @@ export class CampaniaController {
     }
   };
 
-  // OBTENER COORDINADORES ACTIVOS
   obtenerResponsables = async (req, res, next) => {
     try {
       const resultado = await this.obtenerResponsablesUseCase.ejecutar();
